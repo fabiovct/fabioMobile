@@ -1,0 +1,12 @@
+{
+  "name": "fabiomobile",
+  "displayName": "fabiomobile",
+  "expo": {
+    "name": "fabiomobile",
+    "slug": "fabiomobile",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
