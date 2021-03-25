@@ -1,14 +1,57 @@
 import React, {useState} from 'react';
 import {View,KeyboardAvoidingView,Platform, Image, Text, StyleSheet,TouchableOpacity, TextInput} from 'react-native';
-// import api from '../services/api';
+import api from '../../services/api';
 import logo from '../../assets/logo.png';
 
 export default function Login() {
-    async function handleSubmit() {
-        const [email, setEmail] = useState('');
-        const [techs, setTechs] = useState('');
+    // async function handleSubmit() {
+    //     const [email, setEmail] = useState('');
+    //     const [techs, setTechs] = useState('');
 
+    // }
+
+    async function login(event){
+        event.preventDefault();
+        const data = {
+            "email": email,
+            "password": password
+        }
+
+        try {
+            
+
+       await api.post('api/login', data, {
+        }).then((result) => {
+           console.warn(result.data)
+        });
+    } catch (error) {
+            console.warn(error)
     }
+        
+    }
+
+
+    // async function loginUser(event) {
+    //     console.log(event)
+    //     event.preventDefault();
+    //     const data = {
+    //         'email': email,
+    //         'password': password
+    //     };
+
+    //     const response =  await api.post('api/login', data, {
+
+    //     });
+    //     if(response.data['token']){
+    //         localStorage.setItem('token',response.data['token'])
+    //         window.location.href = '/home';
+    //     }
+        
+        
+    // }
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     return (
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -22,17 +65,20 @@ export default function Login() {
                 keyboardType="email-address"
                 autoCapitalize="none"
                 autoCorrect={false}
+                onChangeText={email => setEmail(email)}
                 />
-                <Text style={styles.label}>Tecnologias *</Text>
+                <Text style={styles.label}>password </Text>
                 <TextInput
                 style={styles.input}
                 placeholder="Tecnologias de interesse"
                 placeholderTextColor="#999"
                 autoCapitalize="words"
                 autoCorrect={false}
+                secureTextEntry={true}
+                onChangeText={password => setPassword(password)}
                 />
                 <TouchableOpacity style={styles.buttom}>
-                    <Text style={styles.buttomText}>Encontrar spots</Text>
+                    <Text onPress={login} style={styles.buttomText}>Logar</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
         </KeyboardAvoidingView>
