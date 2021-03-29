@@ -2,8 +2,11 @@ import React, {useState} from 'react';
 import {View,KeyboardAvoidingView,Platform, Image, Text, StyleSheet,TouchableOpacity, TextInput} from 'react-native';
 import api from '../../services/api';
 import logo from '../../assets/logo.png';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Login() {
+export default function Login({navigation}) {
+    // const navigation = useNavigation();
     // async function handleSubmit() {
     //     const [email, setEmail] = useState('');
     //     const [techs, setTechs] = useState('');
@@ -17,12 +20,14 @@ export default function Login() {
             "password": password
         }
 
-        try {
+    try {
             
 
        await api.post('api/login', data, {
         }).then((result) => {
-           console.warn(result.data)
+                  AsyncStorage.setItem('@storage_Key', result.data)
+                  navigation.navigate('ListProducts')
+        //    console.warn(result.data)
         });
     } catch (error) {
             console.warn(error)
