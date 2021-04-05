@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View,KeyboardAvoidingView,Platform, Image, Text, StyleSheet,TouchableOpacity, TextInput} from 'react-native';
+import {View,KeyboardAvoidingView,Platform, Image, Text, StyleSheet,TouchableOpacity, TextInput, Button} from 'react-native';
 import api from '../../services/api';
 import logo from '../../assets/logo.png';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -21,13 +21,16 @@ export default function Login({navigation}) {
         }
 
     try {
-            
-
        await api.post('api/login', data, {
         }).then((result) => {
-                  AsyncStorage.setItem('@storage_Key', result.data)
-                  navigation.navigate('ListProducts')
-        //    console.warn(result.data)
+            navigation.navigate('ListProducts')
+            // if(result.data != 0){
+            //     AsyncStorage.setItem('@storage_Key', result.data)
+            //     navigation.navigate('ListProducts')
+            // }else{
+            //     // console.warn('sjhadkjahdkjsa')
+            //     alert('senha ou login errados')
+            // }
         });
     } catch (error) {
             console.warn(error)
@@ -82,9 +85,9 @@ export default function Login({navigation}) {
                 secureTextEntry={true}
                 onChangeText={password => setPassword(password)}
                 />
-                <TouchableOpacity style={styles.buttom}>
-                    <Text onPress={login} style={styles.buttomText}>Logar</Text>
-                </TouchableOpacity>
+                {/* <TouchableOpacity style={styles.buttom}> */}
+                    <Button onPress={login} style={styles.buttomLogar} title='Logar'/>
+                {/* </TouchableOpacity> */}
             </KeyboardAvoidingView>
         </KeyboardAvoidingView>
         )
@@ -95,6 +98,10 @@ export default function Login({navigation}) {
 
 
 const styles = StyleSheet.create({
+    buttomLogar: {
+        margin: 10
+    },
+
     container: {
         flex: 1,
         justifyContent: 'center',
