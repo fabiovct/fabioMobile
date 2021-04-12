@@ -6,12 +6,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
 export default function Login({navigation}) {
-    // const navigation = useNavigation();
-    // async function handleSubmit() {
-    //     const [email, setEmail] = useState('');
-    //     const [techs, setTechs] = useState('');
-
-    // }
 
     async function login(event){
         event.preventDefault();
@@ -33,30 +27,9 @@ export default function Login({navigation}) {
             // }
         });
     } catch (error) {
-            console.warn(error)
+        console.warn(error)
+    }   
     }
-        
-    }
-
-
-    // async function loginUser(event) {
-    //     console.log(event)
-    //     event.preventDefault();
-    //     const data = {
-    //         'email': email,
-    //         'password': password
-    //     };
-
-    //     const response =  await api.post('api/login', data, {
-
-    //     });
-    //     if(response.data['token']){
-    //         localStorage.setItem('token',response.data['token'])
-    //         window.location.href = '/home';
-    //     }
-        
-        
-    // }
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

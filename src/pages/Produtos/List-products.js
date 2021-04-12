@@ -16,7 +16,7 @@ export default function ListProducts({navigation}) {
     }
 
     function novo(){
-        alert('ddd')
+      navigation.navigate('NewProduct');
     }
 
 
