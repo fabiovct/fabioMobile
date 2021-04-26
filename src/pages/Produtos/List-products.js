@@ -60,10 +60,10 @@ export default function ListProducts({navigation}) {
     function getActions(product){
       return (
           <>
-              {/* <Button onPress={() => props.navigation.navigate('UserForm', user)} 
+              <Button onPress={() => navigation.navigate('UpdateProduct', product)} 
               type="clear"
               icon={<Icon name="edit" size={25} color="orange"/>}
-              /> */}
+              />
               <Button onPress={() => confirmUserDeletion(product)} 
               type="clear"
               icon={<Icon name="delete" size={25} color="red"/>}
