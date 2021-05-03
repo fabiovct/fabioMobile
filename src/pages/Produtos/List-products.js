@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {View,KeyboardAvoidingView,Platform, Image, Text, StyleSheet,TouchableOpacity, TextInput, SafeAreaView, StatusBar} from 'react-native';
+import {View,KeyboardAvoidingView,Platform, Image, Text, StyleSheet,TouchableOpacity, TextInput, SafeAreaView, StatusBar } from 'react-native';
 import api from '../../services/api';
 import logo from '../../assets/logo.png';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FlatList } from 'react-native-gesture-handler';
-import { ListItem, Avatar, Button, Icon } from 'react-native-elements'
+import { ListItem, Avatar, Icon, Button } from 'react-native-elements'
+import { ThemeProvider } from 'react-native-elements';
 
 
 export default function ListProducts({navigation}) {
@@ -75,11 +76,13 @@ export default function ListProducts({navigation}) {
 
   function getItem({item}) {
     return (
-      <ListItem rightElement={getActions(item)} key={item.id}  >
+      <ListItem style={styles.list} rightElement={getActions(item)} key={item.id}  >
         {/* <Avatar source={{uri: item.name}} /> */}
+        <ListItem.Content>
         <ListItem.Title >{item.name}</ListItem.Title>
         <ListItem.Subtitle>{item.brand}</ListItem.Subtitle>
-        <ListItem ><Text>{item.price}</Text></ListItem>
+        </ListItem.Content>
+        <ListItem ><Text>{item.price.toString()}</Text></ListItem>
         <ListItem >{getActions(item)}</ListItem>
         {/* <ListItem.Content>{getActions(user)}</ListItem.Content> */}
     </ListItem>
@@ -133,50 +136,48 @@ export default function ListProducts({navigation}) {
                 renderItem={getItem}
             />
 
-
-
-
-
-        
-
-        
-    {/* <SafeAreaView style={styles.container}> */}
-      {/* <FlatList
-      style={styles.diva}
-        data={produtos}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      /> */}
-    {/* </SafeAreaView> */}
-
-    <Button
-    onPress={novo}
-    title="Add"
-    color="green"
-    />
-
-    <Button
-    onPress={teste}
-    title="Logout"
-    color="#841584"
-    />
+    <View style={{flexDirection: "row", padding:5, margin:10}}>
+    <View style={{ flex: 1}}>
+        <Button
+        onPress={novo}
+        title="Cadastrar"
+        buttonStyle = {{backgroundColor: 'green'}}
+        />
+    </View>
+    <View style={{ flex: 1}}>
+        <Button
+        onPress={teste}
+        title="Logout"
+        buttonStyle = {{backgroundColor: 'red', marginLeft:5}}
+        />
+    </View>
+    </View>
     </>
-        // <TouchableOpacity style={styles.buttom}>
-        //     <Text onPress={teste} style={styles.buttomText}>Teste</Text>
-        // </TouchableOpacity>
-        // <FlatList></FlatList>
     )
-
-
 }
+
+// const theme = {
+//   Button: {
+//     containerStyle: {
+//       marginTop: 10
+//     }
+//   }
+// }
 
 
 const styles = StyleSheet.create({
     titulotela:{
         marginTop:50,
+        marginBottom: 10,
         marginHorizontal: 10,
         fontSize:20
-
+    },
+    // buttonadd:{
+    //     color:'red'
+    // },
+    list:{
+      borderBottomWidth:5,
+      borderBottomColor:'grey'
     },
     diva: {
         marginTop:50
