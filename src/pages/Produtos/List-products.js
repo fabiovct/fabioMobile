@@ -129,7 +129,13 @@ export default function ListProducts({navigation}) {
 
     return (
         <>
-        <Text style={styles.titulotela}>Lista de Produtos</Text>
+
+        <Text style={styles.titulotela}>
+        <Button onPress={() => navigation.navigate('Login')} 
+              type="clear"
+              icon={<Icon name="arrow-back" size={25} color="orange"/>}
+        />
+          Lista de Produtos</Text>
             <FlatList
                 keyExtractor={item => item.id}
                 data={produtos}
@@ -170,7 +176,8 @@ const styles = StyleSheet.create({
         marginTop:50,
         marginBottom: 10,
         marginHorizontal: 10,
-        fontSize:20
+        fontSize:20,
+        backgroundColor:"gray"
     },
     // buttonadd:{
     //     color:'red'
